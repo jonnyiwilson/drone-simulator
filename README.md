@@ -1,4 +1,4 @@
-# Drone School Simulator
+# Drone Simulator
 
 ## Overview
 The Drone Simulator is a basic user interface (UI) application designed to mimic the controls and telemetry readings of a drone. Users can monitor real-time telemetry such as speed, heading, and altitude, and also set desired parameters for the drone's autopilot system.
