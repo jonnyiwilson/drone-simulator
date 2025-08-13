@@ -82,16 +82,22 @@ class DroneSchool:
         self.heading += (self.target_heading - self.heading) / 10 + random.uniform(-0.2, 0.2)
         self.altitude += (self.target_altitude - self.altitude) / 10 + random.uniform(-0.2, 0.2)
 
-        self.speed_label["text"] = f"{self.speed:.2f}"
-        self.heading_label["text"] = f"{self.heading:.2f}"
-        self.altitude_label["text"] = f"{self.altitude:.2f}"
+        self.speed_label["text"] = f"{self.speed:.2f} mph"
+        self.heading_label["text"] = f"{self.heading:.2f} °"
+        self.altitude_label["text"] = f"{self.altitude:.2f} feet"
 
         self.root.after(500, self.update_telemetry)
 
     def apply_settings(self):
-        self.target_speed = float(self.speed_input.get())
-        self.target_heading = float(self.heading_input.get())
-        self.target_altitude = float(self.altitude_input.get())
+        self.target_speed = self._parse_float(self.speed_input.get(), self.target_speed)
+        self.target_heading = self._parse_float(self.heading_input.get(), self.target_heading)
+        self.target_altitude = self._parse_float(self.altitude_input.get(), self.target_altitude)
+
+    def _parse_float(self, value, default):
+        try:
+            return float(value)
+        except ValueError:
+            return default
 
     def toggle_landing_gear(self):
         self.landing_gear_status = not self.landing_gear_status
